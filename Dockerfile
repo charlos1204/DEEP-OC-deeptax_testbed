@@ -60,6 +60,8 @@ RUN apt-get update && apt-get install -y \
   libbz2-dev \
   libatlas-dev \
   libatlas3-base \
+  python3.5-dev \
+  python3.5-venv \
   software-properties-common
 
 # Set CUDA_ROOT
@@ -87,8 +89,8 @@ RUN cd /root && git clone https://github.com/Theano/libgpuarray.git && cd libgpu
   make install
 # Install pygpu
 RUN cd /root/libgpuarray && \
-  python3 setup.py build_ext -L /usr/lib -I /usr/include && \
-  python3 setup.py install
+  python setup.py build_ext -L /usr/lib -I /usr/include && \
+  python setup.py install
 
 # Install bleeding-edge Theano
 RUN pip install --upgrade six
