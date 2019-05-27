@@ -104,6 +104,8 @@ RUN pip install flask
 RUN pip install joblib
 RUN pip install scikit-learn
 RUN pip install tabulate
+RUN pip install --upgrade pandas
+RUN pip install --upgrade wheel
 RUN pip install --upgrade --no-deps --force-reinstall git+https://github.com/dnouri/nolearn.git@master#egg=nolearn==0.7.git
 
 # Set up .theanorc for CUDA
@@ -142,7 +144,7 @@ ENV DISABLE_AUTHENTICATION_AND_ASSUME_AUTHENTICATED_USER yes
 
 
 # Install user app:
-RUN git clone -b $branch https://github.com/charlos1204/firsttest && \
+RUN git clone https://github.com/charlos1204/firsttest && \
     cd  firsttest && \
     pip install --no-cache-dir -e . && \
     rm -rf /root/.cache/pip/* && \
