@@ -40,12 +40,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     pip --version
 
 ##########################################################################################################
-# Install git, wget, python-dev, pip, BLAS + LAPACK and other dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
   nano \
-  gcc \
   g++ \
-  gfortran \
+  wget \
+  git \
   build-essential \
   tk-dev \
   checkinstall\
@@ -60,58 +60,31 @@ RUN apt-get update && apt-get install -y \
   libbz2-dev \
   libatlas-dev \
   libatlas3-base \
-  python3.5-dev \
-  python3.5-venv \
+  python3-pip \
+  python3-setuptools \
+  python3-tk \
+  python3-matplotlib \
+  emboss \
+  emboss-lib \
   software-properties-common
 
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1
+RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
+
 # Set CUDA_ROOT
-ENV CUDA_ROOT /usr/local/cuda/bin
+#ENV CUDA_ROOT /usr/local/cuda/bin
+#ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda-9.0/lib64
 
-# Install CMake 3
-RUN cd /root && wget https://github.com/Kitware/CMake/releases/download/v3.14.0-rc1/cmake-3.14.0-rc1.tar.gz && \
-  tar -xvf cmake-3.14.0-rc1.tar.gz && cd cmake-3.14.0-rc1 && \
-  ./configure && \
-  make -j "$(nproc)" && \
-  make install
-
-# Install Cython
-RUN pip install Cython
-RUN pip install --upgrade numpy
-
-# Clone libgpuarray repo and move into it
-RUN cd /root && git clone https://github.com/Theano/libgpuarray.git && cd libgpuarray && \
-# Make and move into build directory
-  mkdir Build && cd Build && \
-# CMake
-  cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr && \
-# Make
-  make -j"$(nproc)" && \
-  make install
-# Install pygpu
-RUN cd /root/libgpuarray && \
-  python setup.py build_ext -L /usr/lib -I /usr/include && \
-  python setup.py install
-
-# Install bleeding-edge Theano
+# Install Tensorfow
 RUN pip install --upgrade six
-RUN pip install --upgrade --no-deps git+git://github.com/Theano/Theano.git
-RUN pip install --upgrade https://github.com/Lasagne/Lasagne/archive/master.zip
-RUN pip install biopython
-RUN pip install nose
-RUN pip install scipy
-RUN pip install tqdm
-RUN pip install flask
-RUN pip install joblib
-RUN pip install scikit-learn
-RUN pip install tabulate
+RUN pip install --upgrade flask
 RUN pip install --upgrade pandas
 RUN pip install --upgrade wheel
-RUN pip install --upgrade --no-deps --force-reinstall git+https://github.com/dnouri/nolearn.git@master#egg=nolearn==0.7.git
+RUN pip install --upgrade numpy
+RUN pip install --upgrade sklearn
+RUN pip install --upgrade tensorflow-gpu==1.12
+RUN pip install --upgrade keras
 
-# Set up .theanorc for CUDA
-RUN echo "[global]\ndevice=cuda\nfloatX=float64\nroot=/usr/local/cuda-9.1\n[lib]\ncnmem=0.1\n[nvcc]\nfastmath=True\n[gpuarray]\npreallocate=1" > /root/.theanorc
-
-COPY base.py /usr/local/lib/python3.5/site-packages/nolearn/lasagne
 #######################################################################
 
 # Set LANG environment
