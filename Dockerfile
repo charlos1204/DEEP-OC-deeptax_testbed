@@ -76,12 +76,12 @@ ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda-9.0/lib64
 # Install Tensorfow
 RUN pip install --upgrade six
 RUN pip install --upgrade flask
-RUN pip install --upgrade pandas
+RUN pip install --upgrade pandas==0.24.2
 RUN pip install --upgrade wheel
-RUN pip install --upgrade numpy
+RUN pip install --upgrade numpy==1.17.1
 RUN pip install --upgrade sklearn
 RUN pip install --upgrade tensorflow-gpu==1.12
-RUN pip install --upgrade keras
+RUN pip install --upgrade keras==2.2.4
 
 #######################################################################
 
