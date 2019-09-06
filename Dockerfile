@@ -1,8 +1,11 @@
 # Dockerfile may have two Arguments: tag, branch
 # tag - tag for the Base image, (e.g. 1.10.0-py3 for tensorflow)
 # branch - user repository branch to clone (default: master, other option: test)
+#scm
+#ARG tag=9.0-cudnn7-devel-ubuntu16.04
 
-ARG tag=9.0-cudnn7-devel-ubuntu16.04
+#testbed
+ARG tag=9.1-cudnn7-devel-ubuntu16.04
 
 # Base image, e.g. tensorflow/tensorflow:1.12.0-py3
 FROM nvidia/cuda:${tag}
@@ -67,12 +70,12 @@ RUN apt-get update && \
   python3-dev \
   software-properties-common
 
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1
-RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
+#RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1
+#RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
 
-# Set CUDA_ROOT
-ENV CUDA_ROOT /usr/local/cuda/bin
-ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda-9.0/lib64
+# Set CUDA_ROOT uncomment only for scm
+#ENV CUDA_ROOT /usr/local/cuda/bin
+#ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda-9.0/lib64
 
 # Install Tensorfow
 RUN pip install --upgrade six
