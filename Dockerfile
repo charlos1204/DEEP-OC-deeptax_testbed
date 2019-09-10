@@ -27,7 +27,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
          wget \
          python3-setuptools \
          python3-pip \
-         python3-wheel && \ 
+         python3-wheel && \
+         apt-utils
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /root/.cache/pip/* && \
@@ -47,9 +48,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y --no-install-recommends \
   g++ \
-  wget \
-  git \
-  build-essential \
   tk-dev \
   checkinstall\
   liblapack-dev \
@@ -59,12 +57,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
   libssl-dev \
   libsqlite3-dev \
   libgdbm-dev \
-  libc6-dev \
   libbz2-dev \
   libatlas-base-dev \
   libatlas3-base \
-  python3-pip \
-  python3-setuptools \
   python3-tk \
   python3-matplotlib \
   python3-dev \
