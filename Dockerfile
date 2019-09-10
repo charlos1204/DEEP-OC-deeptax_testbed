@@ -20,6 +20,9 @@ ARG branch=master
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+ENV TZ Europe/Berlin
+RUN echo $TZ > /etc/timezone
+
 # Install ubuntu updates and python related stuff
 # link python3 to python, pip3 to pip, if needed
 RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
@@ -50,7 +53,7 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
     pip --version
 
 ##########################################################################################################
-RUN DEBIAN_FRONTEND='noninteractive' apt-get install -y --no-install-recommends \
+RUN DEBIAN_FRONTEND='noninteractive' apt-get update && apt-get install -y --no-install-recommends \
   g++ \
   tk-dev \
   #checkinstall\
@@ -64,7 +67,7 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get install -y --no-install-recommends 
   #libbz2-dev \
   #libatlas-base-dev \
   #libatlas3-base \
-  software-properties-common
+  #software-properties-common
 
 #RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1
 #RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
