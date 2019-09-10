@@ -6,7 +6,7 @@
 
 #testbed
 #ARG tag=9.1-cudnn7-devel-ubuntu16.04
-ARG tag=10.0-cudnn7-devel-ubuntu18.04
+ARG tag=10.0-cudnn7-devel-ubuntu16.04
 
 # Base image, e.g. tensorflow/tensorflow:1.12.0-py3
 FROM nvidia/cuda:${tag}
@@ -20,8 +20,8 @@ ARG branch=master
 
 # Install ubuntu updates and python related stuff
 # link python3 to python, pip3 to pip, if needed
-RUN DEBIAN_FRONTEND=noninteractive apt update && \
-    apt install -y --no-install-recommends \
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+    apt-get install -y --no-install-recommends \
          git \
          curl \
          wget \
@@ -44,8 +44,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt update && \
     pip --version
 
 ##########################################################################################################
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    apt-get install -y --no-install-recommends \
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
   g++ \
   tk-dev \
   #checkinstall\
@@ -61,8 +60,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
   #libatlas3-base \
   python3-tk \
   python3-matplotlib \
-  python3-dev
-  #software-properties-common
+  python3-dev \
+  software-properties-common
 
 #RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1
 #RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
