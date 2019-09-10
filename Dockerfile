@@ -18,6 +18,8 @@ LABEL version='0.01'
 # What user branch to clone (!)
 ARG branch=master
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Install ubuntu updates and python related stuff
 # link python3 to python, pip3 to pip, if needed
 RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
