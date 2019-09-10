@@ -20,15 +20,14 @@ ARG branch=master
 
 # Install ubuntu updates and python related stuff
 # link python3 to python, pip3 to pip, if needed
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    apt-get install -y --no-install-recommends \
+RUN DEBIAN_FRONTEND=noninteractive apt update && \
+    apt install -y --no-install-recommends \
          git \
          curl \
          wget \
          python3-setuptools \
          python3-pip \
-         python3-wheel \
-         apt-utils && \
+         python3-wheel &&\
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /root/.cache/pip/* && \
@@ -49,21 +48,21 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y --no-install-recommends \
   g++ \
   tk-dev \
-  checkinstall\
-  liblapack-dev \
-  libopenblas-dev \
-  libreadline-gplv2-dev \
-  libncursesw5-dev \
-  libssl-dev \
-  libsqlite3-dev \
-  libgdbm-dev \
-  libbz2-dev \
-  libatlas-base-dev \
-  libatlas3-base \
+  #checkinstall\
+  #liblapack-dev \
+  #libopenblas-dev \
+  #libreadline-gplv2-dev \
+  #libncursesw5-dev \
+  #libssl-dev \
+  #libsqlite3-dev \
+  #libgdbm-dev \
+  #libbz2-dev \
+  #libatlas-base-dev \
+  #libatlas3-base \
   python3-tk \
   python3-matplotlib \
-  python3-dev \
-  software-properties-common
+  python3-dev
+  #software-properties-common
 
 #RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1
 #RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
