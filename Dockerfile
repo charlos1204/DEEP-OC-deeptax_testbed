@@ -61,7 +61,7 @@ RUN apt-get update && \
   libgdbm-dev \
   libc6-dev \
   libbz2-dev \
-  libatlas-dev \
+  libatlas-base-dev \
   libatlas3-base \
   python3-pip \
   python3-setuptools \
