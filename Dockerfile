@@ -28,7 +28,10 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
          apt-utils \
          python3-setuptools \
          python3-pip \
-         python3-wheel &&\
+         python3-wheel \
+         python3-tk \
+         python3-matplotlib \
+         python3-dev &&\
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /root/.cache/pip/* && \
@@ -59,9 +62,6 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get install -y --no-install-recommends 
   #libbz2-dev \
   #libatlas-base-dev \
   #libatlas3-base \
-  python3-tk \
-  python3-matplotlib \
-  python3-dev \
   software-properties-common
 
 #RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1
