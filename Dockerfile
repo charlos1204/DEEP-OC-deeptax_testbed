@@ -44,7 +44,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     pip --version
 
 ##########################################################################################################
-RUN apt-get update && \
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y --no-install-recommends \
   g++ \
   wget \
