@@ -27,8 +27,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
          wget \
          python3-setuptools \
          python3-pip \
-         python3-wheel && \
-         apt-utils
+         python3-wheel \
+         apt-utils && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /root/.cache/pip/* && \
