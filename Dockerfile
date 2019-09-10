@@ -2,10 +2,10 @@
 # tag - tag for the Base image, (e.g. 1.10.0-py3 for tensorflow)
 # branch - user repository branch to clone (default: master, other option: test)
 #scm
-#ARG tag=9.0-cudnn7-devel-ubuntu16.04
+ARG tag=9.0-cudnn7-devel-ubuntu16.04
 
 #testbed
-ARG tag=9.1-cudnn7-devel-ubuntu16.04
+#ARG tag=9.1-cudnn7-devel-ubuntu16.04
 
 # Base image, e.g. tensorflow/tensorflow:1.12.0-py3
 FROM nvidia/cuda:${tag}
@@ -80,12 +80,15 @@ RUN apt-get update && \
 # Install Tensorfow
 RUN pip install --upgrade six
 RUN pip install --upgrade flask
-RUN pip install --upgrade pandas #==0.24.2
+#
+RUN pip install --upgrade pandas==0.24.2
 #RUN pip install --upgrade wheel
 RUN pip install --upgrade numpy
 RUN pip install --upgrade sklearn
-RUN pip install --upgrade tensorflow-gpu #==1.12
-RUN pip install --upgrade keras #==2.2.4
+#
+RUN pip install --upgrade tensorflow-gpu==1.12
+#
+RUN pip install --upgrade keras==2.2.4
 
 #######################################################################
 
