@@ -55,7 +55,7 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
 ##########################################################################################################
 RUN DEBIAN_FRONTEND='noninteractive' apt-get update && apt-get install -y --no-install-recommends \
   g++ \
-  tk-dev \
+  tk-dev
   #checkinstall\
   #liblapack-dev \
   #libopenblas-dev \
