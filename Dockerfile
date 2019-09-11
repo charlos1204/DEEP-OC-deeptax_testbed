@@ -5,8 +5,8 @@
 #ARG tag=9.0-cudnn7-devel-ubuntu16.04
 
 #testbed
-#ARG tag=9.1-cudnn7-devel-ubuntu16.04
-ARG tag=10.0-cudnn7-devel-ubuntu18.04
+ARG tag=9.1-cudnn7-devel-ubuntu18.04
+#ARG tag=10.0-cudnn7-devel-ubuntu18.04
 
 # Base image, e.g. tensorflow/tensorflow:1.12.0-py3
 FROM nvidia/cuda:${tag}
@@ -100,7 +100,7 @@ WORKDIR /srv
 # Install rclone
 RUN wget https://downloads.rclone.org/rclone-current-linux-amd64.deb && \
     dpkg -i rclone-current-linux-amd64.deb && \
-    apt install -f && \
+    apt-get install -f && \
     mkdir /srv/.rclone/ && touch /srv/.rclone/rclone.conf && \
     rm rclone-current-linux-amd64.deb && \
     apt-get clean && \
