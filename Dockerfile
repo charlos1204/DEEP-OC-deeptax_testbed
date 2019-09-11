@@ -5,7 +5,7 @@
 #ARG tag=9.0-cudnn7-devel-ubuntu16.04
 
 #testbed
-ARG tag=9.1-cudnn7-devel-ubuntu18.04
+ARG tag=9.2-cudnn7-devel-ubuntu18.04
 #ARG tag=10.0-cudnn7-devel-ubuntu18.04
 
 # Base image, e.g. tensorflow/tensorflow:1.12.0-py3
