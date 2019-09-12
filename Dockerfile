@@ -2,10 +2,10 @@
 # tag - tag for the Base image, (e.g. 1.10.0-py3 for tensorflow)
 # branch - user repository branch to clone (default: master, other option: test)
 #scm
-#ARG tag=9.0-cudnn7-devel-ubuntu16.04
+ARG tag=9.0-cudnn7-devel-ubuntu16.04
 
 #testbed
-ARG tag=9.2-cudnn7-devel-ubuntu18.04
+#ARG tag=9.2-cudnn7-devel-ubuntu18.04
 #ARG tag=10.0-cudnn7-devel-ubuntu18.04
 
 # Base image, e.g. tensorflow/tensorflow:1.12.0-py3
@@ -20,8 +20,8 @@ ARG branch=master
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ENV TZ Europe/Berlin
-RUN echo $TZ > /etc/timezone
+#ENV TZ Europe/Berlin
+#RUN echo $TZ > /etc/timezone
 
 # Install ubuntu updates and python related stuff
 # link python3 to python, pip3 to pip, if needed
@@ -79,15 +79,15 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && apt-get install -y --no-i
 # Install Tensorfow
 RUN pip install --upgrade six
 RUN pip install --upgrade flask
-#==0.24.2
-RUN pip install --upgrade pandas
+#
+RUN pip install --upgrade pandas==0.24.2
 #RUN pip install --upgrade wheel
 RUN pip install --upgrade numpy
 RUN pip install --upgrade sklearn
-#==1.12
-RUN pip install --upgrade tensorflow-gpu
-#==2.2.4
-RUN pip install --upgrade keras
+#
+RUN pip install --upgrade tensorflow-gpu==1.12
+#
+RUN pip install --upgrade keras==2.2.4
 
 #######################################################################
 
