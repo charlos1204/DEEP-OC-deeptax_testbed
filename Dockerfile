@@ -82,7 +82,7 @@ RUN pip install --upgrade flask
 #
 RUN pip install --upgrade pandas==0.24.2
 #RUN pip install --upgrade wheel
-RUN pip install --upgrade numpy
+RUN pip install --upgrade numpy==1.16.4
 RUN pip install --upgrade sklearn
 #
 RUN pip install --upgrade tensorflow-gpu==1.12
