@@ -66,7 +66,7 @@ RUN pip install --upgrade flask
 RUN pip install --upgrade pandas
 RUN pip install --upgrade numpy
 RUN pip install --upgrade sklearn
-RUN pip install --upgrade tensorflow-gpu
+RUN pip install --upgrade tensorflow-gpu==1.12
 RUN pip install --upgrade keras
 
 
