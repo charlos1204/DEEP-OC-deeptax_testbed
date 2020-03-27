@@ -63,11 +63,11 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && apt-get install -y --no-i
 RUN pip install --upgrade wheel
 RUN pip install --upgrade six
 RUN pip install --upgrade flask
-RUN pip install pandas==0.24.2
-RUN pip install numpy==1.16.4
-RUN pip install sklearn
-RUN pip install tensorflow-gpu==1.12
-RUN pip install keras==2.2.4
+RUN pip install --upgrade pandas
+RUN pip install --upgrade numpy
+RUN pip install --upgrade sklearn
+RUN pip install --upgrade tensorflow-gpu
+RUN pip install --upgrade keras
 
 
 #######################################################################
