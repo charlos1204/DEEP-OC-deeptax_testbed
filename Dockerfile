@@ -52,44 +52,36 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
     python --version && \
     pip --version
 
+
 ##########################################################################################################
 RUN DEBIAN_FRONTEND='noninteractive' apt-get update && apt-get install -y --no-install-recommends \
   g++ \
-  tk-dev
-  #checkinstall\
-  #liblapack-dev \
-  #libopenblas-dev \
-  #libreadline-gplv2-dev \
-  #libncursesw5-dev \
-  #libssl-dev \
-  #libsqlite3-dev \
-  #libgdbm-dev \
-  #libbz2-dev \
-  #libatlas-base-dev \
-  #libatlas3-base \
-  #software-properties-common
-
-#RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1
-#RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
-
-# Set CUDA_ROOT uncomment only for scm
-#ENV CUDA_ROOT /usr/local/cuda/bin
-#ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda-9.0/lib64
+  tk-dev \
+  nano
 
 # Install Tensorfow
 RUN pip install --upgrade six
 RUN pip install --upgrade flask
-#
 RUN pip install --upgrade pandas==0.24.2
-#RUN pip install --upgrade wheel
 RUN pip install --upgrade numpy==1.16.4
 RUN pip install --upgrade sklearn
-#
 RUN pip install --upgrade tensorflow-gpu==1.12
-#
 RUN pip install --upgrade keras==2.2.4
 
+
 #######################################################################
+# If to install JupyterLab
+ARG jlab=true
+
+# Install JupyterLab
+ENV JUPYTER_CONFIG_DIR /srv/.jupyter/
+ENV SHELL /bin/bash
+RUN if [ "$jlab" = true ]; then \
+       # by default has to work (1.2.0 wrongly required nodejs and npm)
+       pip install --no-cache-dir jupyterlab ; \
+       git clone https://github.com/deephdc/deep-jupyter /srv/.jupyter ; \
+    else echo "[INFO] Skip JupyterLab installation!"; fi
+
 
 # Set LANG environment
 ENV LANG C.UTF-8
