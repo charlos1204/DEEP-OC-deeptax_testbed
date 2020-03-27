@@ -33,7 +33,7 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
          apt-utils \
          python3-setuptools \
          python3-pip \
-         #python3-wheel \
+         python3-wheel \
          python3-tk \
          python3-matplotlib \
          python3-dev &&\
@@ -60,14 +60,13 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && apt-get install -y --no-i
   nano
 
 # Install Tensorfow
-RUN pip install --upgrade wheel
 RUN pip install --upgrade six
 RUN pip install --upgrade flask
-RUN pip install --upgrade pandas
-RUN pip install --upgrade numpy
+RUN pip install --upgrade pandas==0.24.2
+RUN pip install --upgrade numpy==1.16.4
 RUN pip install --upgrade sklearn
 RUN pip install --upgrade tensorflow-gpu==1.12
-RUN pip install --upgrade keras
+RUN pip install --upgrade keras==2.2.4
 
 
 #######################################################################
