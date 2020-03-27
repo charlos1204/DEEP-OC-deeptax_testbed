@@ -60,6 +60,7 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && apt-get install -y --no-i
   nano
 
 # Install Tensorfow
+RUN pip install --upgrade pip
 RUN pip install --upgrade six
 RUN pip install --upgrade flask
 RUN pip install --upgrade pandas==0.24.2
