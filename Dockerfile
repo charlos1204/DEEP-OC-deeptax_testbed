@@ -35,7 +35,6 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
          wget \
          $pyVer-setuptools \
          $pyVer-pip \
-         $pyVer-wheel && \
          $pyVer-wheel \
          $pyVer-tk \
          $pyVer-matplotlib \
