@@ -1,15 +1,16 @@
 # Dockerfile may have two Arguments: tag, branch
 # tag - tag for the Base image, (e.g. 1.10.0-py3 for tensorflow)
 # branch - user repository branch to clone (default: master, other option: test)
-#scm
-ARG tag=9.0-cudnn7-devel-ubuntu16.04
+
+#ARG tag=9.0-cudnn7-devel-ubuntu16.04
+ARG tag=1.12.0-gpu-py3
 
 #testbed
 #ARG tag=9.2-cudnn7-devel-ubuntu18.04
 #ARG tag=10.0-cudnn7-devel-ubuntu18.04
 
-# Base image, e.g. tensorflow/tensorflow:1.12.0-py3
-FROM nvidia/cuda:${tag}
+# Base image, e.g. tensorflow/tensorflow:1.12.0-gpu-py3
+FROM tensorflow/tensorflow:${tag}
 
 LABEL maintainer='Carlos Garcia'
 LABEL version='0.01'
@@ -17,6 +18,8 @@ LABEL version='0.01'
 
 # What user branch to clone (!)
 ARG branch=master
+
+ARG pyVer=python3
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -30,18 +33,18 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update && \
          git \
          curl \
          wget \
-         apt-utils \
-         python3-setuptools \
-         python3-pip \
-         python3-wheel \
-         python3-tk \
-         python3-matplotlib \
-         python3-dev &&\
+         $pyVer-setuptools \
+         $pyVer-pip \
+         $pyVer-wheel && \
+         $pyVer-wheel \
+         $pyVer-tk \
+         $pyVer-matplotlib \
+         $pyVer-dev &&\
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /root/.cache/pip/* && \
     rm -rf /tmp/* && \
-    if [ "python3" = "python3" ] ; then \
+    if [ "$pyVer" = "python3" ] ; then \
        if [ ! -e /usr/bin/pip ]; then \
           ln -s /usr/bin/pip3 /usr/bin/pip; \
        fi; \
@@ -66,7 +69,7 @@ RUN pip install --upgrade flask
 RUN pip install --upgrade pandas==0.24.2
 RUN pip install --upgrade numpy==1.16.4
 RUN pip install --upgrade sklearn
-RUN pip --default-timeout=1000 install tensorflow-gpu==1.12
+#RUN pip --default-timeout=1000 install tensorflow-gpu==1.12
 RUN pip install --upgrade keras==2.2.4
 
 
@@ -128,5 +131,12 @@ EXPOSE 5000
 # Open Monitoring port
 EXPOSE 6006
 
+# Open Jupyterlab port
+EXPOSE 8888
+
+
+CMD ["deepaas-run", "--openwhisk-detect", "--listen-ip", "0.0.0.0", "--listen-port", "5000"]
+
+
 # Account for OpenWisk functionality (deepaas >=0.3.0)
-CMD ["sh", "-c", "deepaas-run --openwhisk-detect --listen-ip 0.0.0.0"]
+#CMD ["sh", "-c", "deepaas-run --openwhisk-detect --listen-ip 0.0.0.0"]
